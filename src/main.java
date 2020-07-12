@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -13,14 +14,24 @@ public class main {
 
         Lexer lexer = new Lexer();
         Parser parser = new Parser();
+        Translator translator = new Translator();
 
         String[][] lexeme = lexer.getLexeme(code);
         String[][] parse = parser.parse(lexeme);
+        String cppCode = translator.translate(parse);
 
-        for (String[] strings : lexeme)
+        putCode(cppCode);
+
+        for (String[] strings : parse)
             if (strings[0] != null)
                 System.out.println(Arrays.toString(strings));
 
+    }
+
+    private static void putCode(String code) throws IOException {
+        FileWriter fw = new FileWriter("cpp/code.cpp");
+        fw.write(code);
+        fw.close();
     }
 
     private static String readFile(String fileName) throws Exception {

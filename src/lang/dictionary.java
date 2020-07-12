@@ -8,8 +8,8 @@ public class dictionary {
             {"for", "INDET"},
             {"if", "INDET"},
             {"else", "INDET"},
-            {"return", "type"},
-            {"import", "type"},
+            {"return", "INDET"},
+            {"import", "INDET"},
 
             {"[", "SIGN"},
             {"]", "SIGN"},
@@ -25,13 +25,27 @@ public class dictionary {
             {"String", "TYPE"},
             {"boolean", "TYPE"},
             {"char", "TYPE"},
+            {"NULL", "TYPE"},
 
             {"-", "OPERATOR"},
+            {"^", "OPERATOR"},
             {"+", "OPERATOR"},
             {"=", "OPERATOR"},
             {"*", "OPERATOR"},
             {"/", "OPERATOR"},
             {"%", "OPERATOR"},
+            {"<", "OPERATOR"},
+            {">", "OPERATOR"},
+            {":", "OPERATOR"},
+    };
+
+    public static String[][] translate = {
+
+            {"boolean", "bool"},
+            {"int", "int"},
+            {"String", "string"},
+            {"import", "#include"},
+
     };
 
 }

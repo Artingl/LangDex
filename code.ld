@@ -2,10 +2,11 @@ import io;
 # Comment!
 
 String test1 = "Test!";
-print("#Hello, World " + test1 + " " + test(10, 29));
+
+print(test(test1, " Teeeeeest!"));
 
 
-funct test(int n1, int n2)
+String funct test(String n1, String n2)
 {
     return n1 + n2;
 }

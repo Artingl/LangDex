@@ -7,6 +7,6 @@ LangDex - Opensource language, that created for community refinements
     
     print(getText());
     
-    funct getText() {
+    String funct getText() {
         return "Hello, World!";
     }

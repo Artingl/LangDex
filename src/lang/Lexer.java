@@ -10,8 +10,8 @@ public class Lexer {
     {
         tokens = new String[code.length()][4];
         String[] tmpString;
-        String nextToken = "";
-        String sAdd = "";
+        StringBuilder nextToken = new StringBuilder();
+        StringBuilder sAdd = new StringBuilder();
         int count = 0;
         boolean skips = false;
 
@@ -26,22 +26,22 @@ public class Lexer {
                 {
                     tokens[count] = new String[]{sAdd + chr, "UNKNOWN", "", ""};
                     count++;
-                    sAdd = "";
+                    sAdd = new StringBuilder();
                     continue;
                 }
             }
 
             if(skips)
             {
-                sAdd += chr;
+                sAdd.append(chr);
                 continue;
             }
 
-            tmpString = checkSymbols.check(dictionary.symbols, nextToken.trim());
+            tmpString = checkSymbols.check(dictionary.symbols, nextToken.toString().trim());
             if(!tmpString[0].equals(""))
             {
                 tokens[count] = tmpString;
-                nextToken = "";
+                nextToken = new StringBuilder();
                 count++;
                 continue;
             }
@@ -49,12 +49,12 @@ public class Lexer {
             tmpString = checkSymbols.check(dictionary.symbols, chr);
             if(!tmpString[0].equals(""))
             {
-                if(!nextToken.trim().equals(""))
+                if(!nextToken.toString().trim().equals(""))
                 {
-                    if(!chr.equals(nextToken.trim()))
+                    if(!chr.equals(nextToken.toString().trim()))
                     {
-                        tokens[count] = new String[]{nextToken.trim(), "UNKNOWN", "", ""};
-                        nextToken = "";
+                        tokens[count] = new String[]{nextToken.toString().trim(), "UNKNOWN", "", ""};
+                        nextToken = new StringBuilder();
                         count++;
                     }
                 }
@@ -64,7 +64,7 @@ public class Lexer {
                 continue;
             }
 
-            nextToken += chr;
+            nextToken.append(chr);
         }
 
         return tokens;
