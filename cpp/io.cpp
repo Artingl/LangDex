@@ -5,3 +5,4 @@ void print(std::string message)
 {
     std::cout << message;
 }
+

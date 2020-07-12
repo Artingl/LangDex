@@ -91,7 +91,8 @@ public class Translator {
                     skip++;
                 }
                 else if(token[0].equals("import")) {
-                    bof.append(" ").append(checkSymbols.check(dictionary.translate, token[0])[1]).append(" \"");
+                    bof.append(" ").append(checkSymbols.check(dictionary.translate, token[0])[1]).append(" ");
+                    String lastToken = "";
                     for(int j = i + 1; j < tokens.length; j++)
                     {
                         String[] token1 = tokens[j];
@@ -101,12 +102,16 @@ public class Translator {
                         bof.append(token1[0]);
 
 
-
+                        lastToken = token1[0];
                         skip++;
                     }
 
                     skip++;
-                    bof.append(".cpp\"\n");
+                    if(lastToken.startsWith("\""))
+                    {
+                        bof = new StringBuilder(bof.toString().substring(0, bof.toString().length() - 1));
+                        bof.append(".cpp\"\n");
+                    }
                 }
                 else {
                     code.append(" ").append(token[0]).append(" ");

@@ -1,12 +1,4 @@
-import io;
-# Comment!
-
-String test1 = "Test!";
-
-print(test(test1, " Teeeeeest!"));
+import "io";
 
 
-String funct test(String n1, String n2)
-{
-    return n1 + n2;
-}
+print("Hello, World!");

@@ -22,9 +22,9 @@ public class main {
 
         putCode(cppCode);
 
-        for (String[] strings : parse)
+/*        for (String[] strings : parse)
             if (strings[0] != null)
-                System.out.println(Arrays.toString(strings));
+                System.out.println(Arrays.toString(strings));*/
 
     }
 
@@ -32,6 +32,11 @@ public class main {
         FileWriter fw = new FileWriter("cpp/code.cpp");
         fw.write(code);
         fw.close();
+
+        Runtime runTime = Runtime.getRuntime();
+        Process process = runTime.exec("mingw64/bin/g++.exe cpp/code.cpp");
+
+        System.out.println(process.getInputStream().read());
     }
 
     private static String readFile(String fileName) throws Exception {
