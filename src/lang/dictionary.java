@@ -8,6 +8,7 @@ public class dictionary {
             {"for", "INDET"},
             {"if", "INDET"},
             {"else", "INDET"},
+            {"return", "type"},
             {"import", "type"},
 
             {"[", "SIGN"},

@@ -12,8 +12,10 @@ public class main {
         String code = delComments.del(readFile(fileName));
 
         Lexer lexer = new Lexer();
+        Parser parser = new Parser();
 
         String[][] lexeme = lexer.getLexeme(code);
+        String[][] parse = parser.parse(lexeme);
 
         for (String[] strings : lexeme)
             if (strings[0] != null)
