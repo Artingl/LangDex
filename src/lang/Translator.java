@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Translator {
 
-    public String translate(String[][] tokens)
+    public String translate(String[][] tokens, String m)
     {
         StringBuilder result = new StringBuilder();
         int skip = 0;
@@ -26,6 +26,12 @@ public class Translator {
             }
             String[] token = tokens[i];
             if(token[1] == null) continue;
+
+            if(token[1].equals("CPP"))
+            {
+                bof.append(token[0]);
+                continue;
+            }
 
             if(token[1].equals("SIGN") || token[1].equals("OPERATOR") || token[1].equals("UNKNOWN"))
             {
@@ -57,7 +63,6 @@ public class Translator {
             {
                 if(token[0].equals("funct"))
                 {
-
                     for(int j = i + 1; j < tokens.length; j++)
                     {
                         String[] token1 = tokens[j];
@@ -112,6 +117,7 @@ public class Translator {
                         bof = new StringBuilder(bof.toString().substring(0, bof.toString().length() - 1));
                         bof.append(".cpp\"\n");
                     }
+                    bof.append(" \n");
                 }
                 else {
                     code.append(" ").append(token[0]).append(" ");
@@ -124,7 +130,10 @@ public class Translator {
         }
 
         bof.append("\n").append(eof).append("\n");
-        result.append(bof).append("\nint main(){ \n").append(code).append("\nreturn 0;\n }\n");
+        if(m.equals(""))
+            result.append(bof).append("\nint main(){ \n").append(code).append("\nreturn 0;\n }\n");
+        else
+            result.append(bof).append("\n").append(code).append("\n");
 
         return result.toString();
     }

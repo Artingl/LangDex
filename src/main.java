@@ -9,8 +9,9 @@ import lang.*;
 public class main {
 
     public static void main(String[] args) throws Exception {
-        String fileName = "code.ld";
+        String fileName = getArg(args, "-f");
         String code = delComments.del(readFile(fileName));
+        String m = getArg(args, "-nm");
 
         Lexer lexer = new Lexer();
         Parser parser = new Parser();
@@ -18,7 +19,7 @@ public class main {
 
         String[][] lexeme = lexer.getLexeme(code);
         String[][] parse = parser.parse(lexeme);
-        String cppCode = translator.translate(parse);
+        String cppCode = translator.translate(parse, m);
 
         putCode(cppCode);
 
@@ -26,6 +27,19 @@ public class main {
             if (strings[0] != null)
                 System.out.println(Arrays.toString(strings));*/
 
+    }
+
+    private static String getArg(String[] args, String arg)
+    {
+        for(int i = 0; i < args.length; i++)
+        {
+            if(args[i].equals(arg))
+                return "true";
+            else if(args[i].split("=")[0].equals(arg))
+                return args[i].split("=")[1];
+        }
+
+        return "";
     }
 
     private static void putCode(String code) throws IOException {

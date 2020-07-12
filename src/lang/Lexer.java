@@ -14,10 +14,57 @@ public class Lexer {
         StringBuilder sAdd = new StringBuilder();
         int count = 0;
         boolean skips = false;
+        int skip = 0;
 
         for(int i = 0; i < code.length(); i++)
         {
+            if(skip != 0)
+            {
+                skip--;
+                continue;
+            }
             String chr = String.valueOf((char ) code.getBytes()[i]);
+
+            if(nextToken.toString().trim().equals("CPP"))
+            {
+                nextToken = new StringBuilder();
+                String cpp = "";
+                boolean start = false;
+                int s = 0;
+                for(int j = i; j < code.length(); j++)
+                {
+                    String c = String.valueOf((char ) code.getBytes()[j]);
+                    if(c.equals("{") && !start)
+                    {
+                        start = true;
+                        continue;
+                    }
+
+                    if(start)
+                    {
+                        if(c.equals("{")) s++;
+
+                        if(c.equals("}") && s <= 0)
+                        {
+                            break;
+                        }
+                        else if(c.equals("}")) {
+                            s--;
+                        }
+
+                        cpp += c;
+                    }
+
+                    skip++;
+                }
+
+                tokens[count] = new String[]{cpp.substring(0, cpp.length() - 1), "CPP"};
+                count++;
+
+                skip++;
+
+                continue;
+            }
 
             if(chr.equals("\"") || chr.equals("'"))
             {

@@ -1,10 +1,53 @@
 #include <string>
 using namespace std;
  #include "io.cpp"
- #include <windows.h>
+ 
+ #include <windows.h> 
 
 
-int main(){ 
-HWND m_hSel= NULL BOOL CASView::CreateSelWindow(){HWND hWnd=GetSafeHwnd();WNDCLASSEX WndClass;WndClass.cbSize=sizeof(WNDCLASSEX);WndClass.style=CS_HREDRAW | CS_VREDRAW;WndClass.lpfnWndProc=(WNDPROC)SelWindowProc;WndClass.cbClsExtra=0;WndClass.cbWndExtra=0;WndClass.hInstance=AfxGetApp()->m_hInstance;WndClass.hIcon=0l;WndClass.hCursor= NULL WndClass.hbrBackground=(HBRUSH)GetStockObject(GRAY_BRUSH);WndClass.lpszMenuName= NULL WndClass.lpszClassName=_T("SelWindow");WndClass.hIconSm=0l; if (!m_hSel && !RegisterClassEx(&WndClass)){RegisterClass((LPWNDCLASS)&WndClass.style);} if m_hSel)::DestroyWindow(m_m_hSel);m_hSel=CreateWindow(WndClass.lpszClassName,_T("Sel Window"),WS_VISIBLE,50,50,50,50,hWnd, NULL AfxGetApp()->m_hInstance, NULL ; return TRUE;}//----------------------------------LRESULT CALLBACK SelWindowProc(HWND hWnd,UINT uMessage,UINT wParam,LONG lParam){ return DefWindowProc(hWnd,uMessage,wParam,lParam);}m_wndMy.SubclassWindow(m_hSel);m_wndMy//--
-return 0;
- }
+    void m();
+    LRESULT CALLBACK WindowProcessMessages(HWND hwnd, UINT msg, WPARAM param, LPARAM lparam);
+
+    int WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, PSTR cmdLine, INT cmdCount) {
+    	// Register the window class
+    	const char *CLASS_NAME = "myWin32WindowClass";
+    	WNDCLASS wc{};
+    	wc.hInstance = currentInstance;
+    	wc.lpszClassName = CLASS_NAME;
+    	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
+    	wc.lpfnWndProc = WindowProcessMessages;
+    	RegisterClass(&wc);
+
+    	// Create the window
+    	CreateWindow(CLASS_NAME, "Win32 Tutorial",
+    		WS_OVERLAPPEDWINDOW | WS_VISIBLE,			// Window style
+    		CW_USEDEFAULT, CW_USEDEFAULT,				// Window initial position
+    		800, 600,						// Window size
+    		nullptr, nullptr, nullptr, nullptr);
+
+    	// Window loop
+    	MSG msg{};
+    	while (GetMessage(&msg, nullptr, 0, 0)) {
+    		TranslateMessage(&msg);
+    		DispatchMessage(&msg);
+    	}
+
+    	return 0;
+    }
+
+    LRESULT CALLBACK WindowProcessMessages(HWND hwnd, UINT msg, WPARAM param, LPARAM lparam) {
+        m();
+
+    	switch (msg) {
+    	case WM_DESTROY:
+    		PostQuitMessage(0);
+    		return 0;
+    	default:
+    		return DefWindowProc(hwnd, msg, param, lparam);
+    	}
+    }
+
+
+
+void m(){print("fdfdf");}

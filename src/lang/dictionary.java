@@ -10,6 +10,7 @@ public class dictionary {
             {"else", "INDET"},
             {"return", "INDET"},
             {"import", "INDET"},
+            {"do", "INDET"},
 
             {"[", "SIGN"},
             {"]", "SIGN"},
