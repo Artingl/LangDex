@@ -61,12 +61,21 @@ public class Translator {
 
             if(token[1].equals("INDET"))
             {
+                int oc = 0;
                 if(token[0].equals("funct"))
                 {
                     for(int j = i + 1; j < tokens.length; j++)
                     {
                         String[] token1 = tokens[j];
                         if(token1[1] == null) continue;
+
+                        if(token1[0].equals("{")) oc++;
+                        else if(token1[0].equals("}") && oc > 0) oc--;
+                        if(token1[0].equals("}") && oc == 0)
+                        {
+                            eof.append(" ").append(token1[0]).append(" ");
+                            break;
+                        }
 
                         if(token1[1].equals("TYPE"))
                         {
@@ -114,7 +123,7 @@ public class Translator {
                     skip++;
                     if(lastToken.startsWith("\""))
                     {
-                        bof = new StringBuilder(bof.toString().substring(0, bof.toString().length() - 1));
+                        bof = new StringBuilder(bof.substring(0, bof.toString().length() - 1));
                         bof.append(".cpp\"\n");
                     }
                     bof.append(" \n");

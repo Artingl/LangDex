@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 
 import lang.*;
@@ -42,15 +39,33 @@ public class main {
         return "";
     }
 
-    private static void putCode(String code) throws IOException {
+    private static void putCode(String code) throws IOException, InterruptedException {
         FileWriter fw = new FileWriter("cpp/code.cpp");
         fw.write(code);
         fw.close();
 
-        Runtime runTime = Runtime.getRuntime();
-        Process process = runTime.exec("mingw64/bin/g++.exe cpp/code.cpp");
+        //Runtime runTime = Runtime.getRuntime();
+        //Process process = runTime.exec("mingw64/bin/g++.exe cpp/code.cpp");
 
-        System.out.println(process.getInputStream().read());
+        ProcessBuilder   ps=new ProcessBuilder("mingw64/bin/g++.exe","cpp/code.cpp");
+        ps.redirectErrorStream(true);
+
+        Process pr = ps.start();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line, res = "";
+        while ((line = in.readLine()) != null) {
+            res += line + "\n";
+        }
+        pr.waitFor();
+        in.close();
+
+        if (!res.equals(""))
+        {
+            System.out.println("CPP ERROR: -->");
+            System.out.print(res);
+            System.out.println("<--");
+        }
     }
 
     private static String readFile(String fileName) throws Exception {

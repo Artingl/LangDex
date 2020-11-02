@@ -11,6 +11,8 @@ public class dictionary {
             {"return", "INDET"},
             {"import", "INDET"},
             {"do", "INDET"},
+            {"break", "INDET"},
+            {"define", "INDET"},
 
             {"[", "SIGN"},
             {"]", "SIGN"},
@@ -23,14 +25,18 @@ public class dictionary {
             {",", "SIGN"},
 
             {"int", "TYPE"},
-            {"String", "TYPE"},
+            {"Str", "TYPE"},
+            {"str", "TYPE"},
             {"boolean", "TYPE"},
             {"char", "TYPE"},
+            {"empty", "TYPE"},
+            {"short", "TYPE"},
             {"NULL", "TYPE"},
 
             {"-", "OPERATOR"},
             {"^", "OPERATOR"},
             {"+", "OPERATOR"},
+            {"!", "OPERATOR"},
             {"=", "OPERATOR"},
             {"*", "OPERATOR"},
             {"/", "OPERATOR"},
@@ -44,8 +50,12 @@ public class dictionary {
 
             {"boolean", "bool"},
             {"int", "int"},
-            {"String", "string"},
+            {"Str", "string"},
+            {"str", "string"},
+
             {"import", "#include"},
+            {"define", "#define"},
+            {"empty", "void"}
 
     };
 

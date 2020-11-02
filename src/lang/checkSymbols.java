@@ -6,7 +6,9 @@ public class checkSymbols {
     {
         for (String[] symbol : symbols)
             if (symbol[0].equals(str))
+            {
                 return symbol;
+            }
 
         return new String[]{"", ""};
     }

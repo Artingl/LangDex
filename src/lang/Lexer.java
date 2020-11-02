@@ -14,6 +14,7 @@ public class Lexer {
         StringBuilder sAdd = new StringBuilder();
         int count = 0;
         boolean skips = false;
+        boolean op = false;
         int skip = 0;
 
         for(int i = 0; i < code.length(); i++)
@@ -84,12 +85,14 @@ public class Lexer {
                 continue;
             }
 
+           // boolean tmpB = false;
             tmpString = checkSymbols.check(dictionary.symbols, nextToken.toString().trim());
             if(!tmpString[0].equals(""))
             {
                 tokens[count] = tmpString;
                 nextToken = new StringBuilder();
                 count++;
+                //tmpB = true;
                 continue;
             }
 
@@ -110,6 +113,9 @@ public class Lexer {
                 count++;
                 continue;
             }
+            //else if(tmpB) {
+            //    continue;
+            //}
 
             nextToken.append(chr);
         }
